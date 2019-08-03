@@ -1,14 +1,49 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+
+ext {
+    bintrayRepo = 'InAppUpdate' // Name of the Bintray repo you created
+    bintrayName = 'com.amiteshiitbhu.inappupdate' // Bintray package name
+
+    publishedGroupId = 'com.amiteshiitbhu.inappupdate' // Group ID of the SDK which will be added in implementation line of gradle
+    libraryName = 'inappupdate' // It is generally the module name
+    artifact = 'inappupdate'
+
+    // Artifact ID of the SDK which will be added in implementation line of gradle
+    libraryVersion = '0.0.1' // Version of the library you created in Bintray
+    libraryDescription = 'In App Update which used for the app update from Play Store.' // Small description of the library
+
+    siteUrl = 'https://github.com/amiteshiitbhu/In-App-Update'
+    gitUrl = 'https://github.com/amiteshiitbhu/In-App-Update.git'
+
+    developerId = 'amiteshiitbhu'
+    developerName = 'Amitesh Maurya'
+    developerEmail = 'maurya.amitesh@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+    //Bintray Credentials
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    bintrayUsername = properties.getProperty('bintray.user')
+    bintrayApiKey = properties.getProperty('bintray.apikey')
+}
+
 android {
     compileSdkVersion 29
 
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -36,7 +71,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Google Play Core Library
-    implementation 'com.google.android.play:core:1.5.0'
+    implementation 'com.google.android.play:core:1.6.1'
     implementation 'com.google.android.material:material:1.0.0'
 
 }
+apply from: 'https://raw.githubusercontent.com/numetriclabz/jcenter/master/installv.gradle'
+apply from: 'https://raw.githubusercontent.com/numetriclabz/jcenter/master/bintrayv.gradle'
